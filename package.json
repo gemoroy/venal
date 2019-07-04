@@ -1,0 +1,14 @@
+{
+  "name": "venal",
+  "version": "1.0.0",
+  "description": "EVE Online Margin Tool",
+  "main": "index.js",
+  "author": "Sergey Baranov",
+  "license": "ISC",
+  "scripts": {},
+  "bin": {
+    "venal": "bin/venal"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
