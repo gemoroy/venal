@@ -1,9 +1,12 @@
 const _ = require('underscore');
 
 const getPrices = (orders, options) => {
+  orders = _.filter(orders, order => {
+    return Number(order.jumps) <= options.jumps;
+  });
+
   const bids = _.where(orders, {
     bid: 'True',
-    jumps: options.jumps,
   });
 
   let max = null;
@@ -15,7 +18,6 @@ const getPrices = (orders, options) => {
 
   const sells = _.where(orders, {
     bid: 'False',
-    jumps: options.jumps,
   });
 
   let min = null;

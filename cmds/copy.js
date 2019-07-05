@@ -3,8 +3,9 @@ const emitter = new events.EventEmitter();
 const clipboard = require('clipboardy');
 const chalk = require('chalk');
 
-const { Watcher } = require('../modules/watcher.js');
-const { getPrices } = require('../modules/prices.js');
+const { Watcher } = require('../modules/watcher');
+const { getPrices } = require('../modules/prices');
+const { getConfig } = require('../modules/config');
 
 const color = value => {
   value = Number(value);
@@ -18,15 +19,17 @@ const color = value => {
   }
 };
 
-module.exports = (args = { bid: true, config: null }) => {
+module.exports = args => {
+  const config = getConfig();
+  if (!config) return;
   console.clear();
   console.log('Waiting export..');
   options = {
     bid: args.bid ? 'True' : 'False',
-    step: args.config.step,
-    jumps: args.config.jumps.toString(),
-    path: args.config.path,
-    fees: args.config.fees,
+    step: args.step || config.step,
+    jumps: args.jumps ? args.jumps.toString() : config.jumps.toString(),
+    path: config.path,
+    fees: config.fees,
   };
 
   const watcher = new Watcher({ path: options.path, emitter: emitter });

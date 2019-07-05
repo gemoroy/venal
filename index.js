@@ -1,16 +1,5 @@
 const minimist = require('minimist');
 
-const config = {
-  path:
-    '/home/gemoroy/Games/eve-online/drive_c/users/gemoroy/My Documents/EVE/logs/Marketlogs',
-  jumps: 0,
-  step: 0.01,
-  fees: {
-    broker: 0.02,
-    tax: 0.01,
-  },
-};
-
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
   let cmd = args._[0];
@@ -24,6 +13,9 @@ module.exports = () => {
   }
 
   switch (cmd) {
+    case 'config':
+      require('./cmds/config')(args);
+      break;
     case 'help':
       require('./cmds/help')(args);
       break;
@@ -31,13 +23,15 @@ module.exports = () => {
       require('./cmds/version')(args);
       break;
     case 'sell':
-      require('./cmds/copy.js')({ bid: false, config: config });
+      args.bid = false;
+      require('./cmds/copy.js')(args);
       break;
     case 'buy':
-      require('./cmds/copy.js')({ bid: true, config: config });
+      args.bid = true;
+      require('./cmds/copy.js')(args);
       break;
     default:
-      console.error(`invalid command: ${cmd}`);
+      require('./cmds/help')(args);
       break;
   }
 };
