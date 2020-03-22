@@ -1,5 +1,10 @@
 const _ = require('underscore');
 
+const oomStep = (price) => {
+  const order = Math.pow(10, Math.floor(Math.log(Number(price)) / Math.LN10 + 0.000000001));
+  return order * .001;
+}
+
 const getPrices = (orders, options) => {
   orders = _.filter(orders, order => {
     return Number(order.jumps) <= options.jumps;
@@ -28,8 +33,8 @@ const getPrices = (orders, options) => {
   }
 
   const prices = {
-    buy: max ? Number(max.price) + options.step : 0,
-    sell: min ? Number(min.price) - options.step : 0,
+    buy: max ? Number(max.price) + oomStep(max.price) : 0,
+    sell: min ? Number(min.price) - oomStep(min.price) : 0,
   };
 
   prices.margin =
