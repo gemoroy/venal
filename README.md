@@ -18,7 +18,6 @@ After the first run (`venal buy` or `venal sell`) venal will be created `~/.vena
 {
     "path": "",
     "jumps": 0,
-    "step": 0.01,
     "fees": {
         "broker": 0.02,
         "tax": 0.01

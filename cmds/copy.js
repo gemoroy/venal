@@ -26,7 +26,6 @@ module.exports = args => {
   console.log('Waiting export..');
   options = {
     bid: args.bid ? 'True' : 'False',
-    step: args.step || config.step,
     jumps: args.jumps ? args.jumps.toString() : config.jumps.toString(),
     path: config.path,
     fees: config.fees,

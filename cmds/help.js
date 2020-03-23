@@ -5,7 +5,6 @@ const messages = {
         sell                copy sell price
         buy                 copy buy price
                   --jumps   jumps range, default 0
-                  --step    increment value, default 0.01
 
         config              print current configuration
         help                print this message
