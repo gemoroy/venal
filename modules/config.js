@@ -1,8 +1,9 @@
 const fs = require('fs');
+const os = require('os')
 const path = require('path');
 
 const getConfig = () => {
-  const home = process.env.HOME;
+  const home = os.homedir()
   const file = '.venalrc';
   const filepath = path.join(home, file);
   let config;
@@ -33,9 +34,11 @@ const getConfig = () => {
     } else {
       console.log(`
         Please specify absolute path to Marketlogs dir
-        in ~/.venalrc file
-        You can use find, eg:
+        in ${filepath} file
+        You can use find (unix), eg:
         find ~/ -type d -name Marketlogs -print -quit
+        For Windows, path should looks like (double backslashes):
+        C:\\Users\\gemoroy\\Documents\\EVE\\logs\\marketlogs
       `);
       return null;
     }
